@@ -1,7 +1,7 @@
 # Compiler
 CC = gcc
-CFLAGS = -g3 -O0 -I$(INCLUDE_DIR)
-TEST_CFLAGS = -I$(TEST_INCLUDE_DIR) -I$(INCLUDE_DIR)
+CFLAGS = -g3 -O0 -I$(INCLUDE_DIR) -fprofile-arcs -ftest-coverage
+TEST_CFLAGS = -I$(TEST_INCLUDE_DIR) -I$(INCLUDE_DIR) -fprofile-arcs -ftest-coverage
 
 ###########################
 #                         #
@@ -27,7 +27,7 @@ all: clean setup main $(TARGET)
 
 # Build target binary from object files
 main: $(OBJ_FILES) | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(TARGET)
+	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(TARGET) -lgcov
 
 
 # Compile each source file into an object file
@@ -41,8 +41,8 @@ setup:
 
 
 # Cleanup
-clean:
-	rm -rf $(BUILD_DIR)
+clean: test_clean
+	rm -rf $(BUILD_DIR) *.gcda *.gcno *.gcov
 
 
 # Run the program
@@ -76,7 +76,7 @@ test_all: test_clean test_setup test_main $(TEST_TARGET)
 
 # Build target binary from object files
 test_main: $(TEST_OBJ_FILES) | $(TEST_BUILD_DIR)
-	$(CC) $(TEST_CFLAGS) $(TEST_OBJ_FILES) $(SRC_OBJ_FILES) -o $(TEST_TARGET)
+	$(CC) $(TEST_CFLAGS) $(TEST_OBJ_FILES) $(SRC_OBJ_FILES) -o $(TEST_TARGET) -lgcov
 
 
 # Compile each source file into an object file
@@ -91,13 +91,21 @@ test_setup:
 
 # Cleanup
 test_clean:
-	rm -rf $(TEST_BUILD_DIR)
+	rm -rf $(TEST_BUILD_DIR) *.gcda *.gcno *.gcov
 
 
 # Run the tests
 test: all test_all
 	$(TEST_TARGET)
+	@$(MAKE) generate_coverage
+
+
+generate_coverage:
+	@echo "#################################  Generating Coverage Report...  #################################"
+	@gcov -o $(BUILD_DIR) $(SRC_FILES) > /dev/null 2>&1
+	@$(MAKE) test_clean
+	@gcovr -r . --print-summary
 
 
 # Additional convenience commands
-.PHONY: all clean run setup main
+.PHONY: all clean run setup main generate_coverage test_clean
