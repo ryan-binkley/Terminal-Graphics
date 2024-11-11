@@ -13,11 +13,13 @@ TEST_CFLAGS = -I$(TEST_INCLUDE_DIR) -I$(INCLUDE_DIR) -fprofile-arcs -ftest-cover
 SRC_DIR = src
 BUILD_DIR = build
 INCLUDE_DIR = include
+LIB_DIR = lib
 
 
 # Source files, object files, and executable
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
+LIB_FILES = $(wildcard $(LIB_DIR)/*.o)
 TARGET = $(BUILD_DIR)/main
 
 
@@ -27,7 +29,7 @@ all: clean setup main $(TARGET)
 
 # Build target binary from object files
 main: $(OBJ_FILES) | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(TARGET) -lgcov
+	$(CC) $(CFLAGS) $(OBJ_FILES) $(LIB_FILES) -o $(TARGET) -lgcov
 
 
 # Compile each source file into an object file
@@ -60,7 +62,7 @@ run: all
 # Directories
 TEST_SRC_DIR = tests/tests
 TEST_BUILD_DIR = tests/build
-TEST_INCLUDE_DIR = tests/include
+TEST_INCLUDE_DIR = lib/include
 
 
 # Source files, object files, and executable
@@ -76,7 +78,7 @@ test_all: test_clean test_setup test_main $(TEST_TARGET)
 
 # Build target binary from object files
 test_main: $(TEST_OBJ_FILES) | $(TEST_BUILD_DIR)
-	$(CC) $(TEST_CFLAGS) $(TEST_OBJ_FILES) $(SRC_OBJ_FILES) -o $(TEST_TARGET) -lgcov
+	$(CC) $(TEST_CFLAGS) $(TEST_OBJ_FILES) $(SRC_OBJ_FILES) $(LIB_FILES) -o $(TEST_TARGET) -lgcov
 
 
 # Compile each source file into an object file
@@ -96,16 +98,22 @@ test_clean:
 
 # Run the tests
 test: all test_all
+	@echo "#####################################################################################################################################################################################"
+	@echo "##################################################################################  Running Tests  ##################################################################################"
+	@echo "#####################################################################################################################################################################################"
 	$(TEST_TARGET)
 	@$(MAKE) generate_coverage
 
 
 generate_coverage:
-	@echo "#################################  Generating Coverage Report...  #################################"
+	@echo "#####################################################################################################################################################################################"
+	@echo "##########################################################################  Generating Coverage Report...  ##########################################################################"
+	@echo "#####################################################################################################################################################################################"
 	@gcov -o $(BUILD_DIR) $(SRC_FILES) > /dev/null 2>&1
 	@$(MAKE) test_clean
-	@gcovr -r . --print-summary
+	@gcovr -r .
+	@$(MAKE) clean
 
-
+#################################
 # Additional convenience commands
 .PHONY: all clean run setup main generate_coverage test_clean

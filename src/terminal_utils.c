@@ -2,7 +2,7 @@
 #include <sys/ioctl.h>
 #include "errors.h"
 
-void getTerminalSize(int *width, int *height)
+void getTerminalSize(int* width, int* height)
 {
     struct winsize window_size;
 

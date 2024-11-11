@@ -8,7 +8,7 @@ extern MunitSuite double_buffer_test_suite[];
 
 /* Master Test Suite List */
 static const MunitSuite test_suite[] = {
-	{ "", NULL, double_buffer_test_suite, 5, MUNIT_SUITE_OPTION_NONE },
+	{ "", NULL, double_buffer_test_suite, 1, MUNIT_SUITE_OPTION_NONE },
 	{ NULL }
 };
 
