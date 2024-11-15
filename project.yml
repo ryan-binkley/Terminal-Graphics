@@ -37,6 +37,7 @@
   :source:
     - src/**
     - include/**
+    - vendor/ceedling/plugins/fake_function_framework/vendor/fff
   :support:
     - test/support
   :libraries: []
@@ -72,10 +73,10 @@
 # For more information on these options, see docs in plugins/gcov
 :gcov:
   :reports:
-    - HtmlDetailed
+    - Text
   :gcovr:
-    :html_medium_threshold: 75
-    :html_high_threshold: 90
+    :branches: false
+    :sort_percentage: false
 
 #:tools:
 # Ceedling defaults to using gcc for compiling, linking, etc.
@@ -97,7 +98,12 @@
 :plugins:
   :load_paths:
     - "#{Ceedling.load_path}"
+    - vendor/ceedling/plugins
   :enabled:
     - stdout_pretty_tests_report
     - module_generator
+    - gcov
+    - fake_function_framework
+  :gcov:
+    - gcovr
 ...
