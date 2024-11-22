@@ -1,7 +1,0 @@
-/home/coolsnake/CLionProjects/Terminal-Graphics/build/CMakeFiles/Terminal_Graphics.dir
-/home/coolsnake/CLionProjects/Terminal-Graphics/build/CMakeFiles/main.dir
-/home/coolsnake/CLionProjects/Terminal-Graphics/build/CMakeFiles/run.dir
-/home/coolsnake/CLionProjects/Terminal-Graphics/build/CMakeFiles/clean-all.dir
-/home/coolsnake/CLionProjects/Terminal-Graphics/build/CMakeFiles/test.dir
-/home/coolsnake/CLionProjects/Terminal-Graphics/build/CMakeFiles/edit_cache.dir
-/home/coolsnake/CLionProjects/Terminal-Graphics/build/CMakeFiles/rebuild_cache.dir

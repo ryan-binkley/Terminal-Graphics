@@ -1,1 +1,0 @@
-/usr/bin/cc -fprofile-arcs -ftest-coverage CMakeFiles/main.dir/src/double_buffer.c.o CMakeFiles/main.dir/src/errors.c.o CMakeFiles/main.dir/src/main.c.o CMakeFiles/main.dir/src/terminal_utils.c.o -o main  /home/coolsnake/CLionProjects/Terminal-Graphics/lib/cmocka.o /home/coolsnake/CLionProjects/Terminal-Graphics/lib/munit.o -lgcov
