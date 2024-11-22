@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/Terminal_Graphics.dir/src/main.c.o -o Terminal_Graphics
