@@ -52,7 +52,7 @@ add_custom_target(clean-all
 
 # Custom test target
 add_custom_target(test
-        COMMAND ceedling test:all gcov:all utils:gcov
+        COMMAND cd ../ && ceedling test:all gcov:all utils:gcov
         COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target clean-all
         COMMENT "Running tests and cleaning up"
 )
