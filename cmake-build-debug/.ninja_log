@@ -1,8 +1,0 @@
-# ninja log v6
-47	79	1732254445414692718	Terminal_Graphics	803aeadcd30d3f8d
-1	33	1732252764738511793	CMakeFiles/Terminal_Graphics.dir/main.c.o	c1cf5cdc857aacb2
-1	26	1732254594221631799	build.ninja	c1ce1681ae3b2fab
-3	41	1732254445370693007	CMakeFiles/Terminal_Graphics.dir/src/main.c.o	e0a0482d1710baff
-3	40	1732254445370693007	CMakeFiles/Terminal_Graphics.dir/src/terminal_utils.c.o	6db24b0da6ff1a03
-2	40	1732254445366693034	CMakeFiles/Terminal_Graphics.dir/src/errors.c.o	babe15a1db1ff90c
-2	47	1732254445366693034	CMakeFiles/Terminal_Graphics.dir/src/double_buffer.c.o	49c63dc31e43e9e7
